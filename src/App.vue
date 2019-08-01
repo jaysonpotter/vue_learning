@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{name: 'event-list'}">Event List</router-link> |
-      <router-link :to="{name: 'event-create'}">Event Create</router-link>
-    </div>
+    <NavBar />
     <router-view />
   </div>
 </template>
@@ -29,3 +26,9 @@
   color: #42b983;
 }
 </style>
+<script>
+  import NavBar from "./components/NavBar";
+  export default {
+    components: {NavBar}
+  }
+</script>
