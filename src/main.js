@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import BaseIcon from "./components/BaseIcon";
+// import BaseIcon from "./components/BaseIcon";
 
 // manual global registered component
 // Vue.component('BaseIcon', BaseIcon);
