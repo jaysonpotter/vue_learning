@@ -44,6 +44,42 @@
       "date": "2019-02-02T23:27:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 3560327,
+      "user": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "fdas",
+      "description": "fdsa",
+      "location": "fdsa",
+      "date": "2019-08-01T18:52:00.000Z",
+      "time": "3:00",
+      "attendees": []
+    },
+    {
+      "id": 7375282,
+      "user": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "fads",
+      "description": "fdsafsd",
+      "location": "fdsafsd",
+      "date": "2019-08-01T20:04:00.000Z",
+      "time": "4:00",
+      "attendees": []
     }
   ]
 }
