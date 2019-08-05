@@ -26,13 +26,29 @@ export const mutations = {
 };
 
 export const actions = {
-    createEvent({commit}, event) {
+    createEvent({commit, dispatch}, event) {
         return EventService.postEvent(event)
             .then(() => {
                 commit('ADD_EVENT', event);
+
+                const notification = {
+                    type: 'success',
+                    message: 'Event has been created'
+                };
+                // root true allows getting into the global $store > notification > add
+                dispatch('notification/add', notification, {root: true});
+            })
+            .catch(error => {
+                const notification = {
+                    type: 'error',
+                    message: 'There was a problem creating event: ' + error.message
+                };
+                // root true allows getting into the global $store > notification > add
+                dispatch('notification/add', notification, {root: true});
+                throw error;
             });
     },
-    fetchEvents({commit}, {perPage, page}) {
+    fetchEvents({commit, dispatch}, {perPage, page}) {
         EventService.getEvents(perPage, page)
             .then(response => {
                 //console.log('total events are ' + response.headers['x-total-count']);
@@ -40,10 +56,15 @@ export const actions = {
                 commit('SET_EVENTS', response.data);
             })
             .catch(error => {
-                console.log('There was an error ' + error.response);
+                const notification = {
+                    type: 'error',
+                    message: 'There was a problem fetching events: ' + error.message
+                };
+                // root true allows getting into the global $store > notification > add
+                dispatch('notification/add', notification, {root: true});
             });
     },
-    fetchEvent({commit, getters}, id) {
+    fetchEvent({commit, getters, dispatch}, id) {
         var event = getters.getEventByID(id);
 
         if (event) {
@@ -54,7 +75,12 @@ export const actions = {
                     commit('SET_EVENT', response.data);
                 })
                 .catch(error => {
-                    console.log('There was an error getting event ' + error.response);
+                    const notification = {
+                        type: 'error',
+                        message: 'There was a problem fetching the event: ' + error.message
+                    };
+                    // root true allows getting into the global $store > notification > add
+                    dispatch('notification/add', notification, {root: true});
                 })
         }
     }
@@ -62,15 +88,15 @@ export const actions = {
 };
 
 export const getters = {
-    categoryLength  : state => {
-        return state.categories.length;
-    },
-    doneTodos       : state => {
-        return state.todos.filter(todo => todo.done);
-    },
-    activeTodosCount: (state) => {
-        return state.todos.filter(todo => !todo.done);
-    },
+    // categoryLength  : state => {
+    //     return state.categories.length;
+    // },
+    // doneTodos       : state => {
+    //     return state.todos.filter(todo => todo.done);
+    // },
+    // activeTodosCount: (state) => {
+    //     return state.todos.filter(todo => !todo.done);
+    // },
     getEventByID    : state => id => {
         return state.events.find(event => event.id === id);
     }
